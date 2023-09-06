@@ -16,8 +16,8 @@ import re
 import tempfile
 from PIL import Image
 from pdf2image import convert_from_path
-from PyPDF4 import PdfFileReader
-from PyPDF4.utils import PdfReadError
+# from PyPDF4 import PdfFileReader
+# from PyPDF4.utils import PdfReadError
 import cv2
 import numpy as np
 from ultralytics import YOLO
@@ -25,7 +25,7 @@ from PIL import Image
 #import requests
 #from io import BytesIO
 #import imageio
-from google.colab.patches import cv2_imshow
+# from google.colab.patches import cv2_imshow
 import easyocr
 import json
 #import pandas as pd
@@ -47,8 +47,8 @@ class ImageProcessor:
     def __init__(self, input_path, output_dir):
         self.input_path = input_path
         self.output_dir = output_dir
-        self.template_folder_path = "/content/drive/MyDrive/demo v0/templates"
-        self.path_model_ROIs = "/content/drive/MyDrive/demo v0/YOLOv8/best.pt"  # Path to the YOLO model
+        self.template_folder_path = "demo_v0/templates"
+        self.path_model_ROIs = "demo_v0/YOLOv8/best.pt"  # Path to the YOLO model
 
     def combine_images(self, images, orientation='horizontal'):
         if orientation == 'horizontal':
@@ -155,7 +155,7 @@ class ImageProcessor:
                 model1 = YOLO(self.path_model_ROIs)
                 path_image = image_path
                 self.detect_ROIs_and_save_predictions(path_image, model1)
-                self.move_images_with_new_names("/content/runs/detect/predict5/crops", self.output_dir)
+                self.move_images_with_new_names("runs/detect/predict5/crops", self.output_dir)
                 folder_path = self.output_dir
             else:
                 print("The input image is not a resume/cv image.")
@@ -171,7 +171,7 @@ class ExperiencesExtraction:
         self.input_dir = input_dir
         self.output_experience_dir = output_experience_dir
         self.word_to_find = word_to_find
-        self.path_model_experience = "/content/drive/MyDrive/demo v0/experience detection/best (1).pt"
+        self.path_model_experience = "demo_v0/experience detection/best (1).pt"
 
     def find_image_with_word_in_name(self, folder_path, word):
         for filename in os.listdir(folder_path):
@@ -655,10 +655,10 @@ import json
 class ResumeParser:
     def __init__(self, input_path):
         self.INPUT_PATH = input_path
-        self.OUTPUT_DIR = "./Final_Resulte"
-        self.INPUT_DIR="./Final_Resulte"
-        self.ROIs_folder_path="./Final_Resulte"
-        self.OUTPUT_EXPERIENCE_DIR = "./Experienses"
+        self.OUTPUT_DIR = "Final_Result"
+        self.INPUT_DIR="Final_Result"
+        self.ROIs_folder_path="Final_Result"
+        self.OUTPUT_EXPERIENCE_DIR = "Experienses"
         self.DESTINATION_FOLDER = "All_ROIs"
         self.ROIs_DIR="All_ROIs"
         self.EXPERIENCES_DIR="All_ROIs/Experiences"
@@ -721,7 +721,7 @@ class ResumeParser:
             return data
 
 #if __name__ == "__main__":
- #   input_path = "/content/drive/MyDrive/demo v0/templates/Sahnoun_Ismail_CV.jpg"
+ #   input_path = "demo_v0/templates/Sahnoun_Ismail_CV.jpg"
   #  resume_parser = ResumeParser(input_path)
    # final_file_path = resume_parser.parse_resume()
     #print("Final output file:", final_file_path)
@@ -751,7 +751,7 @@ class MongoDBLoader:
             print("An error occurred while loading JSON data into MongoDB:", str(e))
 
 if __name__ == "__main__":
-    input_path = "/content/drive/MyDrive/demo v0/templates/Sahnoun_Ismail_CV.jpg"
+    input_path = "demo_v0/templates/Sahnoun_Ismail_CV.jpg"
     resume_parser = ResumeParser(input_path)
     final_file_path = resume_parser.parse_resume()
 

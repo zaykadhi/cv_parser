@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request , jsonfy
+from flask import Flask, render_template, request , jsonify
 from markupsafe import escape
 from flask import url_for
 import os 
@@ -29,7 +29,7 @@ def save_file (request, file_path=uploaded_files_path):
     file.save(input_path)
     data = main_process (input_path)
 
-    return jsonfy({'data': data})
+    return jsonify({'data': data})
 
 def main_process (input_path):
     resume_parser = ResumeParser(input_path)
